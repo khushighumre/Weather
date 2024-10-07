@@ -49,6 +49,40 @@ async function updateWeatherInfo(city) {
 }
 }
 
+async function updateWeatherInfo(city) {
+    try {
+        const weatherData = await getFetchData('weather', city);
+        
+        if (weatherData.cod === '404') { 
+            document.getElementById('errorMessage').style.display = 'block';
+        } else {
+            document.getElementById('errorMessage').style.display = 'none';
+
+            const temp = weatherData.main.temp;
+            document.querySelector('.temp').innerText = `${temp}°C`;
+            document.querySelector('.city').innerText = weatherData.name;
+            document.querySelector('.humidity').innerText = `${weatherData.main.humidity}%`;
+            document.querySelector('.wind').innerText = `${weatherData.wind.speed} km/h`;
+
+            // Update weather description based on temperature
+            let weatherDescription = '';
+            if (temp < 10) {
+                weatherDescription = 'cold';
+            } else if (temp >= 10 && temp < 20) {
+                weatherDescription = 'cool';
+            } else if (temp >= 20 && temp < 30) {
+                weatherDescription = 'warm';
+            } else {
+                weatherDescription = 'hot';
+            }
+
+            document.querySelector('.about-weather').innerText = weatherDescription;
+        }
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+        document.getElementById('errorMessage').style.display = 'block';
+    }
+}
 
 
 
