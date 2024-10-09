@@ -48,13 +48,13 @@
     width: 60px;
     height: 60px;
     cursor: pointer;
-    display: flex; /* Use flexbox to center the image */
+    display: flex; 
     justify-content: center;
     align-items: center;
 }
 
 .search button img {
-    width: 24px;  /* Adjust the size of the search icon */
+    width: 24px;  
     height: 24px;
 }
 
